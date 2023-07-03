@@ -1,0 +1,34 @@
+<h1>List of users</h1>
+
+{{#if users}}
+<ul class="users_list">
+  {{#each users}}
+  <li>
+    <p>{{this.username}}</p>
+    <img src="{{this.avatar}}" alt="UserAvatar" style="width: 64px" />
+    <a href="/adduser/{{this.id}}">Update</a>
+    <button class="delete" data-id="{{this.id}}">Delete</button>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<h1>No data show</h1>
+{{/if}}
+
+<script>
+  $(document).ready(function() {
+    $(".delete").on("click", function(){
+      let id = $(this).data("id");
+
+      fetch(`/deleteuser/${id}`, 
+      {
+        method: "DELETE"
+      }).then((data)=>{
+        if(data.status == 200){
+          $(this).parent().remove();
+        }
+      });
+    });
+  });
+</script>
+

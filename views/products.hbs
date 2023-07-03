@@ -1,0 +1,41 @@
+<h1>List of products</h1>
+
+{{#if products}}
+<div class="container">
+  <div class="row">
+  {{#each products}}
+<div class="col-sm">
+   <div class="card" style="width: 18rem;">
+  <img src="{{this.Image}}" class="card-img-top" alt="Image of '{{this.Nombre}}'" style="width: 10rem">
+  <div class="card-body">
+    <h5 class="card-title">{{this.Nombre}}</h5>
+    <a href="/products/addproduct/{{this.id}}" class="btn btn-primary">Update</a>
+    <button class="delete btn btn-danger" data-id="{{this.id}}">Delete</button>
+
+  </div>
+</div>
+   </div>
+  
+  {{/each}}
+    </div>
+</div>
+{{else}}
+<h1>No data show</h1>
+{{/if}}
+
+<script>
+  $(document).ready(function() {
+    $(".delete").on("click", function(){
+      let id = $(this).data("id");
+
+      fetch(`/products/deleteproduct/${id}`, 
+      {
+        method: "DELETE"
+      }).then((data)=>{
+        if(data.status == 200){
+          $(this).parent().parent().remove();
+        }
+      });
+    });
+  });
+</script>

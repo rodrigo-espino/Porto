@@ -1,0 +1,25 @@
+<h1>
+    {{#if users }}
+    Update User Screen
+
+    {{else}}
+    Add new user screen
+    {{/if}}
+</h1>
+
+<form action="/adduser/{{#if users}} {{users.id}} {{/if}}" method="post">
+    <div>
+        <label for="username">username:</label>
+        <input type="text" name="username" value="{{#if users}} {{users.username}} {{/if}}">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="text" name="password" value="{{#if users}} {{users.pass}} {{/if}}">
+    </div>
+    <div>
+        <label for="avatar">Avatar</label>
+        <input type="text" name="avatar" value="{{#if users}} {{users.avatar}} {{/if}}">
+    </div>
+
+    <input type="submit" value="{{#if users}}Update user{{else}}Add User{{/if}}" />
+</form>

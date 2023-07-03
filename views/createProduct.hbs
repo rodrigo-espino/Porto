@@ -1,0 +1,23 @@
+<h1>
+    {{#if product }}
+    Update Product {{product.Nombre}}
+
+    {{else}}
+    Create Product
+    {{/if}}
+</h1>
+
+
+<form class="row g-3" action="/products/addproduct/{{#if product}}{{product.id}} {{/if}}" method="post">
+  <div class="col-12">
+    <label for="inputAddress" class="form-label">Name Of the Product</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="Powerade" name="name" value="{{#if product}} {{product.Nombre}} {{/if}}">
+  </div>
+  <div class="col-12">
+    <label for="inputAddress2" class="form-label">URL Image</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="https://image.com" name="image" value="{{#if product}} {{product.Image}} {{/if}}">
+  </div>
+  
+    <button type="submit" class="btn btn-primary">Create</button>
+  </div>
+</form>
